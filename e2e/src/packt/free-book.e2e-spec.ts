@@ -8,16 +8,16 @@ describe('workspace-project App', () => {
   });
 
   it('should display welcome message', async () => {
-    const usernameValue = 'xxx@xxx.xxx';
+    const usernameValue = 'xxx';
     const passwordValue = 'xxx';
 
 
     await browser.get('https://www.packtpub.com/free-learning');
 
-    // let signInSignInPageButton = element(by.css('a[class=signed-out]'));
-    // if (!signInSignInPageButton) {
-    const signInSignButton = element(by.css('a[class=account]'));
-    // }
+    let signInSignButton = element(by.css('a[class=signed-out]'));
+    if (!signInSignButton) {
+      signInSignButton = element(by.css('a[class=account]'));
+    }
 
     await browser.wait(protractor.ExpectedConditions.visibilityOf(signInSignButton));
     await signInSignButton.click();
@@ -35,11 +35,6 @@ describe('workspace-project App', () => {
 
 
     await browser.sleep(10000);
-    const freeLearning = element(by.partialLinkText('Free Learning'));
-    await browser.wait(protractor.ExpectedConditions.elementToBeClickable(freeLearning));
-    await browser.sleep(2000);
-    await freeLearning.click();
-
 
     const claimButton = element(by.id('fl-claim-btn'));
     await browser.wait(protractor.ExpectedConditions.elementToBeClickable(claimButton));
